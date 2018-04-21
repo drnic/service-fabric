@@ -41,7 +41,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     chrpath
 
 # Install the .NET runtime dependency.  Required for running the product.
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
+RUN apt-get update && \
+    apt-get install curl -y && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
     sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && \
     sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main" > /etc/apt/sources.list.d/dotnetdev.list' && \
     apt-get install -y apt-transport-https apt-utils && \
