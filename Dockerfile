@@ -43,7 +43,7 @@ RUN curl -k https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > 
     apt-get install -y apt-transport-https apt-utils && \
     apt-get -y --reinstall install ca-certificates && \
     apt-get update  -o 'Debug::Acquire::https=true' && \
-    apt-get install -y dotnet-runtime-2.0.6 && \
+    apt-get install -y dotnet-runtime-2.0.6 cmake3 && \
     apt-get remove -y apt-transport-https apt-utils
 
 # Add legacy binary dependencies
