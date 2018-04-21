@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libtool \
     cmake \
-    libunwind-dev \
+    libunwind8-dev \
     uuid-dev \
     libxml2-dev \
     libssl-dev \
