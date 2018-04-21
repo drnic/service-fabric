@@ -188,7 +188,7 @@ namespace Hosting2
 
 
 #if defined(PLATFORM_UNIX)
-        PUBLIC_CONFIG_ENTRY(std::wstring, L"Hosting", ContainerGroupRootImageName, L"ubuntu:16.04", Common::ConfigEntryUpgradePolicy::Static);
+        PUBLIC_CONFIG_ENTRY(std::wstring, L"Hosting", ContainerGroupRootImageName, L"ubuntu:14.04", Common::ConfigEntryUpgradePolicy::Static);
         PUBLIC_CONFIG_ENTRY(std::wstring, L"Hosting", ContainerGroupEntrypoint, L"", Common::ConfigEntryUpgradePolicy::Static);
         //The primary directory of external executable commands on the node.
         PUBLIC_CONFIG_ENTRY(std::wstring, L"Hosting", LinuxExternalExecutablePath, L"/usr/bin/", Common::ConfigEntryUpgradePolicy::Static);

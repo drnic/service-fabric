@@ -1,5 +1,5 @@
 # Service Fabric Dockerfile
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 RUN echo "build ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
