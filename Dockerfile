@@ -2,11 +2,6 @@ FROM ubuntu:14.04
 
 ADD DOCKER_VERSION .
 
-# Add legacy binary dependencies
-ADD https://sfossdeps.blob.core.windows.net/binaries/v0.1.tgz /tmp
-RUN mkdir -p /external && tar -xvf /tmp/v0.1.tgz -C / && \
-     rm /tmp/v0.1.tgz
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     openssh-server \
@@ -38,19 +33,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libncursesw5-dev \
     swig \
     libedit-dev \
-    chrpath
+    chrpath \
+    curl
 
 # Install the .NET runtime dependency.  Required for running the product.
-RUN apt-get update && \
-    apt-get install curl -y && \
-    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
-    sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && \
+RUN curl -k https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg && \
     sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main" > /etc/apt/sources.list.d/dotnetdev.list' && \
     apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893 && \
     apt-get install -y apt-transport-https apt-utils && \
-    apt-get update && \
+    apt-get -y --reinstall install ca-certificates && \
+    apt-get update  -o 'Debug::Acquire::https=true' && \
     apt-get install -y dotnet-runtime-2.0.6 && \
     apt-get remove -y apt-transport-https apt-utils
+
+# Add legacy binary dependencies
+ADD https://sfossdeps.blob.core.windows.net/binaries/v0.1.tgz /tmp
+RUN mkdir -p /external && tar -xvf /tmp/v0.1.tgz -C / && \
+     rm /tmp/v0.1.tgz
 
 RUN locale-gen en_US.UTF-8
 
