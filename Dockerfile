@@ -41,7 +41,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     chrpath
 
 # Install the .NET runtime dependency.  Required for running the product.
-RUN sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list' && \
+RUN sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list' && \
     apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893 && \
     apt-get install -y apt-transport-https apt-utils && \
     apt-get update && \

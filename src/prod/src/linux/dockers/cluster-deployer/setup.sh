@@ -8,7 +8,7 @@ set -ex
 
 apt-get update
 apt-get install -y apt-transport-https
-sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
 apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893
 apt-get update
 apt-get install -y openssh-server curl libc++1 cifs-utils libssh2-1 libsnappy1v5 liblz4-1 libbz2-1.0 libunwind8 libib-util \

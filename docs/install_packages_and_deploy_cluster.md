@@ -24,7 +24,7 @@ To install the SDK and the associated runtime package via the apt-get command-li
 2. Add the `dotnet` repo to your sources list.
 
     ```bash
-    sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+    sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
     ```
 
 3. Add the new Gnu Privacy Guard (GnuPG, or GPG) key to your APT keyring.
