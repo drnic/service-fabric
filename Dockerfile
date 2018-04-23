@@ -54,6 +54,11 @@ RUN curl -k https://www.openssl.org/source/openssl-1.0.2l.tar.gz | tar xz && \
     ln -sf /usr/local/ssl/bin/openssl /usr/bin/openssl && \
     openssl version -v
 
+RUN apt-get install -y --force-yes apt-transport-https apt-utils software-properties-common python-software-properties && \
+    apt-add-repository ppa:lttng/ppa -y && \
+    apt-get update && \
+    apt-get install lttng-tools lttng-modules-dkms -y
+
 # Add legacy binary dependencies
 ADD https://sfossdeps.blob.core.windows.net/binaries/v0.1.tgz /tmp
 RUN mkdir -p /external && tar -xvf /tmp/v0.1.tgz -C / && \
