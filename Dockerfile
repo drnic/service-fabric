@@ -46,6 +46,14 @@ RUN curl -k https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > 
     apt-get install -y dotnet-runtime-2.0.6 cmake3 && \
     apt-get remove -y apt-transport-https apt-utils
 
+RUN curl -k https://www.openssl.org/source/openssl-1.0.2l.tar.gz | tar xz && \
+    cd openssl-1.0.2l && \
+    ./config && \
+    make && \
+    make install && \
+    ln -sf /usr/local/ssl/bin/openssl /usr/bin/openssl && \
+    openssl version -v
+
 # Add legacy binary dependencies
 ADD https://sfossdeps.blob.core.windows.net/binaries/v0.1.tgz /tmp
 RUN mkdir -p /external && tar -xvf /tmp/v0.1.tgz -C / && \
