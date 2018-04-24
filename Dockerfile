@@ -48,11 +48,23 @@ RUN curl -k https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > 
 
 RUN curl -k https://www.openssl.org/source/openssl-1.0.2l.tar.gz | tar xz && \
     cd openssl-1.0.2l && \
-    ./config && \
-    make && \
+    ./config shared --prefix=/usr/local --openssldir=/usr/local && \
+    make -j$(nproc) && \
     make install && \
-    ln -sf /usr/local/ssl/bin/openssl /usr/bin/openssl && \
-    openssl version -v
+    /usr/local/bin/openssl version -v
+
+#RUN echo '/usr/local/lib' > /etc/ld.so.conf.d/usrlocal.conf && ldconfig
+
+RUN apt-get install wget
+RUN wget -qO - https://github.com/curl/curl/releases/download/curl-7_59_0/curl-7.59.0.tar.gz | tar xz && \
+    cd curl* && \
+    ./configure --prefix=/usr/local --with-ssl=/usr/local && \
+    make -j$(nproc) && \
+    make install 
+
+#ENV LDFLAGS="-L/usr/local/lib" \
+#    LD_LIBRARY_PATH="/usr/local/lib" \
+#    CPPFLAGS="-I/usr/local/include/openssl -I/usr/local/include"
 
 RUN apt-get install -y --force-yes apt-transport-https apt-utils software-properties-common python-software-properties && \
     apt-add-repository ppa:lttng/ppa -y && \

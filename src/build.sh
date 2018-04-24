@@ -5,6 +5,9 @@
 # Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
 # ------------------------------------------------------------
 
+export LDFLAGS="$LDFLAGS -L/usr/local/lib"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH /usr/local/lib"
+export CPPFLAGS="$CPPFLAGS -I/usr/local/include/openssl -I/usr/local/include"
 
 PrintUsage()
 {
